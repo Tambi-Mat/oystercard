@@ -2,7 +2,7 @@ require 'station'
 
 describe Station do
   subject(:station) { described_class.new("Paddington",1)}
-
+  
   it 'has a name attribute on initialization' do
     expect(station.station_name).to eq "Paddington"
   end

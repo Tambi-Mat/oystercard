@@ -3,6 +3,7 @@ class Oystercard
   MAXIMUM_BALANCE = 90
   MINIMUM_BALANCE = 1
 
+
   attr_reader :balance, :in_journey, :entry_station, :exit_station, :journey_history
   # attr_accessor :in_journey or attr_reader???
 
@@ -13,12 +14,8 @@ class Oystercard
   end
 
   def top_up(amount)
-    fail 'Max balance of #{Oystercard::MAXIMUM_BALANCE} exceeded' if @balance + amount > MAXIMUM_BALANCE
+    raise 'Max balance of #{MAXIMUM_BALANCE} exceeded' if @balance + amount > MAXIMUM_BALANCE
     @balance += amount
-  end
-
-  def deduct(amount)
-    @balance -= amount
   end
 
   def touch_in(station_name)
@@ -41,5 +38,12 @@ class Oystercard
   def save_journey
     @journey_history << {entry: entry_station, exit: exit_station}
   end
+
+  private
+
+    def deduct(amount)
+      @balance -= amount
+    end
+
 
 end
