@@ -1,3 +1,4 @@
+=begin
 require './lib/oystercard'
 
 card = Oystercard.new
@@ -19,3 +20,4 @@ p card
 card.touch_out(station2)
 
 p card
+=end
