@@ -1,42 +1,21 @@
-
-class Oystercard
-
-  MAXIMUM_BALANCE = 90
-
-  attr_reader :balance, :in_journey
-
-  def initialize
-  p   @balance = 0
-    @in_journey = false
-  end
-
-  def top_up(amount)
-    fail 'Max balance of #{Oystercard::MAXIMUM_BALANCE} exceeded' if @balance + amount > MAXIMUM_BALANCE
-  p  @balance += amount
-
-  end
-
-  def deduct(amount)
-    @balance -= amount
-  end
-
-  def touch_in
-    fail 'insuffient credit on card' if balance < 1
-    @in_journey = true
-  end
-
-  def touch_out
-    @in_journey = false
-  end
-
-end
+require './lib/oystercard'
 
 card = Oystercard.new
+
+station1 = Station.new("Victoria", 3)
+
+station2 = Station.new("Clapham_junc", 2)
+
+card.balance
+
+card.top_up(20)
+
 p card.balance
-p card.top_up(90)
-p card.balance
-p card.deduct(90)
-p card.top_up(0)
-p card.top_up(0.50)
-p card.in_journey
-p card.touch_in
+
+card.touch_in(station1)
+
+p card
+
+card.touch_out(station2)
+
+p card
