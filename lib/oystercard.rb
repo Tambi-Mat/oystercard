@@ -23,25 +23,30 @@ class Oystercard
 
   def touch_in(station_name)
     raise 'Insufficient credit on card' if balance < MINIMUM_BALANCE
+    journey = Journey.new(station_name)
     @in_journey = true
-    @entry_station = station_name
+    @journey_history << journey
+    @entry_station = station_name # not sure if needed for now
   end
 
   def touch_out(station_name)
     @in_journey = false
     deduct(MINIMUM_BALANCE)
+    @journey_history.last.end_journey(station_name)
     @exit_station = station_name
+=begin
     save_journey
+=end
   end
 
   def in_journey?
     entry_station && !exit_station
   end
-
+=begin
   def save_journey
     @journey_history << {entry: entry_station, exit: exit_station}
   end
-
+=end
   private
 
     def deduct(amount)

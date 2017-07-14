@@ -90,10 +90,22 @@ describe Oystercard do
       expect(subject.journey_history).to be_empty
     end
 
+=begin
     it 'shows one journey after a single journey in and out' do
       subject.touch_in(station)
       subject.touch_out(station)
       expect(subject.journey_history.length).to eq 1
+    end
+=end
+    it 'shows the station entered at begining of journey' do
+      subject.touch_in(station)
+      expect(subject.journey_history.last.entry_station).to eq station
+    end
+
+    it 'shows the station exited at the end of the journey' do
+      subject.touch_in(station)
+      subject.touch_out(station)
+      expect(subject.journey_history.last.exit_station).to eq station
     end
   end
 

@@ -7,4 +7,8 @@ class Journey
     @exit_station = exit_station
   end
 
+  def end_journey(station)
+    @exit_station = station
+  end
+
 end
